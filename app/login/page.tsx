@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,8 +28,7 @@ function LoginForm() {
         return;
       }
       const from = searchParams.get('from') || '/';
-      router.push(from);
-      router.refresh();
+      window.location.href = from;
     } catch {
       setError('网络错误，请重试');
     } finally {
